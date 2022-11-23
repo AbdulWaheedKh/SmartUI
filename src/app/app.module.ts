@@ -108,6 +108,29 @@ import { GenericServiceService } from './Services/generic-service.service';
 import {MatButtonModule} from '@angular/material/button';
 
 
+
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+// import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+// import { DialogComponent } from './dialog/dialog/dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { DialougeComponent } from './DemoPages/Tables/dialouge/dialouge.component';
+// import { DialougeComponent } from './Tables/dialouge/dialouge.component';
+
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -142,7 +165,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Dashboards
 
     AnalyticsComponent,
-
+    DialougeComponent,
     // User Pages
 
     ForgotPasswordBoxedComponent,
@@ -197,6 +220,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DynamicChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
+    // DialougeComponent,
 
     //discount Type
 
@@ -223,7 +247,32 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     ChartsModule,
 
-    MatButtonModule
+    MatButtonModule,
+
+
+
+
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+
+
+
+
+
   ],
   providers: [
     {

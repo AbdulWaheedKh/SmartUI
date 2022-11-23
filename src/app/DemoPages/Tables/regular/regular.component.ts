@@ -4,40 +4,11 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DiscountType } from 'src/app/Models/DiscountTypeModel';
 import { GenericServiceService } from 'src/app/Services/generic-service.service';
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { DialougeComponent } from '../dialouge/dialouge.component';
 
 @Component({
   selector: 'app-regular',
@@ -45,117 +16,71 @@ const COUNTRIES: Country[] = [
   styles: []
 })
 export class RegularComponent implements OnInit {
-  myForm:FormGroup;
+
+  displayedColumns: string[] = ['name', 'academicYearId', 'instituteId', 'description','createdDate' ,'modifiedDate' ];
+  dataSource!: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  myForm: FormGroup;
   heading = 'Regular Tables';
   subheading = 'Tables are the backbone of almost all web applications.';
   icon = 'pe-7s-drawer icon-gradient bg-happy-itmeo';
   discount: DiscountType = new DiscountType();
   discountTypeList: DiscountType[]
 
-  constructor(private fb:FormBuilder, private genericService: GenericServiceService,private modalService: NgbModal, private router: Router) {
+  constructor(private dialog: MatDialog,private fb: FormBuilder, private genericService: GenericServiceService, private modalService: NgbModal, private router: Router) {
   }
 
   // @ViewChild('content') addview !: ElementRef
 
-  countries = COUNTRIES;
+
 
 
 
   ngOnInit() {
+this.getAllProducts();
 
-
-    this.myForm = this.fb.group({
-      name: [''],
-      description: ['']
-     
-    } );
-    this.getDiscountUsers()
   }
 
-  openEdit(targetModal, discount: DiscountType) {
-    this.modalService.open(targetModal, {
-      backdrop: 'static',
-      size: 'lg'
-    });
-    this.myForm.patchValue( {
-  
-      name: discount.name,
-      description: discount.description,
-    
-    });
-  }
-
-
-
-  getDiscountUsers() {
-    this.genericService.get().subscribe((res) => {
-      this.discountTypeList = res;
-      console.log(this.discountTypeList);
-
+  openDialog() {
+    this.dialog.open(DialougeComponent, {
+     width:'30%'
+    }).afterClosed().subscribe(val=>{
+      if(val === 'save'){
+        this.getAllProducts();
+      }
     })
   }
 
-  openLarge(content) {
-    this.modalService.open(content, {
-      size: 'lg'
-    });
-  }
-  // openLargeEdit(content , discount:DiscountType) {
-  //   this.modalService.open(content, {
-  //     size: 'lg'
-  //   });
-  //   document.getElementById('name').setAttribute('value', discount.name);
-  //   document.getElementById('desc').setAttribute('value', discount.description);
-  // }
-  openLargeEdit(discount:DiscountType){
-    this.modalService.open(discount ,{
-      size: 'lg'
-    } ),
-    this.myForm.patchValue( {
-  
-      name: discount.name,
-      description: discount.description,
+  getAllProducts(){
+    this.genericService.get().subscribe({
+      next : (res)=>{
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(res);
+        
+      },
+      error :()=>{
+        console.log('Something wrong');
+        
+      }
+    })
+       } 
+
+
+
+
+
+       applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     
-    });
-    console.log(discount.name)
-  }
-
-  deleteActions(discount: DiscountType): void {
-
-    this.genericService.deleteObject(discount.id).then(() => {
-
-
-    });;
-  }
-
-
-  editActions(discount: DiscountType): void {
-console.log(discount.id);
-
-    //this.genericService.deleteObject(discount.id).then(() => {
-
-
-   // });;
-  }
-
-
-
-  AddDiscountType() {
-    this.genericService.createDiscount(this.myForm.value).subscribe(data => {
-      console.log(data);
-      this.myForm.reset();
-      // this.modalService.dismissAll();
-      this.getDiscountUsers();
-    },
-      error => console.log(error));
-  }
-
-  // });
-
-  // }
-  //   deleteActions(id:number){
-  // console.log(id);
-
-  //   }
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      }
 
 }
