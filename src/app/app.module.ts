@@ -105,6 +105,7 @@ import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughn
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
 import { GenericServiceService } from './Services/generic-service.service';
 
+import {MatButtonModule} from '@angular/material/button';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -221,6 +222,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Charts
 
     ChartsModule,
+
+    MatButtonModule
   ],
   providers: [
     {
