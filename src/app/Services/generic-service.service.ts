@@ -18,25 +18,34 @@ export class GenericServiceService {
 
   }
 
-  deleteObject(id: number): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.http.delete<any>('http://localhost:8080/smartSchool/discountTypesController/' + id)
-        .subscribe(
-          response => {
-       //     this.getObjectList();
-            resolve(response);
-          },
-          err => {
-            reject(err);
-          });
-    });
+  // deleteObject(id: number): Promise<DiscountType> {
+  //   return new Promise((resolve, reject) => {
+  //     this.http.delete<any>('http://localhost:8080/smartSchool/discountTypesController/' + id)
+  //       .subscribe(
+  //         response => {
+  //      //     this.getObjectList();
+  //           resolve(response);
+  //         },
+  //         err => {
+  //           reject(err);
+  //         });
+  //   });
+  // }
+
+  deleteObject(id:number){
+    return this.http.delete<any>('http://localhost:8080/smartSchool/discountTypesController/' + id)
   }
+
   createDiscount(discount: DiscountType):Observable<any>{
     return this.http.post('http://localhost:8080/smartSchool/discountTypesController/', discount);
   }
 
-  updateDiscount(discount: DiscountType):Observable<any>{
-    return this.http.put('http://localhost:8080/smartSchool/discountTypesController/', discount);
+  // updateDiscount(discount: DiscountType):Observable<any>{
+  //   return this.http.put('http://localhost:8080/smartSchool/discountTypesController/', discount);
+  // }
+
+  updateDiscount(data:DiscountType , id:number):Observable<any>{
+    return this.http.put<DiscountType>('http://localhost:8080/smartSchool/update/' +id , data)
   }
 
 }

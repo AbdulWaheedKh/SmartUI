@@ -17,7 +17,7 @@ import { DialougeComponent } from '../dialouge/dialouge.component';
 })
 export class RegularComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'academicYearId', 'instituteId', 'description','createdDate' ,'modifiedDate' ];
+  displayedColumns: string[] = ['name', 'academicYearId', 'instituteId', 'description','createdDate' ,'modifiedDate', 'action' ];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -70,8 +70,29 @@ this.getAllProducts();
     })
        } 
 
+       deleteProduct(id:number){
+        this.genericService.deleteObject(id)
+        .subscribe({
+          next:(res)=>{
+            alert('Record deleted Successfully')
+            this.getAllProducts();
+          },
+          error:()=>{
+        alert('Something went wrong while deleting record')
+          }
+        })
+           }
 
-
+           editProduct(row:any){
+            this.dialog.open(DialougeComponent , {
+              width:'30%',
+              data:row
+            }).afterClosed().subscribe(val=>{
+              if(val==='update'){
+                this.getAllProducts();
+              }
+            })
+          }
 
 
        applyFilter(event: Event) {

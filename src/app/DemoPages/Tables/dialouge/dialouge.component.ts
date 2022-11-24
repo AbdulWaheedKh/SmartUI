@@ -26,19 +26,19 @@ export class DialougeComponent implements OnInit {
       description: ['', Validators.required],
     
     });
-    // if (this.editData) {
-    //   this.actionBtn = 'Update';
-    //   this.productForm.controls['productName'].setValue(
-    //     this.editData.productName
-    //   ),
-    //     this.productForm.controls['category'].setValue(this.editData.category),
-    //     this.productForm.controls['freshness'].setValue(
-    //       this.editData.freshness
-    //     ),
-    //     this.productForm.controls['price'].setValue(this.editData.price),
-    //     this.productForm.controls['comment'].setValue(this.editData.comment),
-    //     this.productForm.controls['date'].setValue(this.editData.date);
-    // }
+    if (this.editData) {
+      this.actionBtn = 'Update';
+      this.productForm.controls['name'].setValue(
+        this.editData.name
+      ),
+        this.productForm.controls['description'].setValue(this.editData.description);
+        // this.productForm.controls['freshness'].setValue(
+        //   this.editData.freshness
+        // ),
+        // this.productForm.controls['price'].setValue(this.editData.price),
+        // this.productForm.controls['comment'].setValue(this.editData.comment),
+        // this.productForm.controls['date'].setValue(this.editData.date);
+    }
   }
 
   addProduct() {
@@ -56,24 +56,27 @@ export class DialougeComponent implements OnInit {
         });
       }
     }
-    // else {
-    //   this.updateProduct();
-    // }
+    else {
+      this.updateProduct();
+    }
     // console.log(this.productForm.value);
   }
-  // updateProduct() {
+  updateProduct() {
    
     
-  //   this.api.putProduct(this.productForm.value, this.editData.id).subscribe({
-  //     next: (res) => {
-  //       alert('Record Updated Successfully');
-  //       this.productForm.reset();
-  //       this.dialogref.close('update');
-  //     },
-  //     error: () => {
-  //       alert('Error while updating the record!');
-  //     },
-  //   });
-  // }
+    this.genericService.updateDiscount(this.productForm.value, this.editData.id).subscribe({
+      next: (res) => {
+        alert('Record Updated Successfully');
+        this.productForm.reset();
+        this.dialogref.close('update');
+      },
+      error: () => {
+        console.log("-> "+ this.productForm.value);
+        console.log("-> "+ this.editData.id);
+        
+        alert('Error while updating the record!');
+      },
+    });
+  }
 
 }
