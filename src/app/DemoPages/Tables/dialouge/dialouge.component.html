@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Add Discount form</h1>
 <div mat-dialog-content>
-   <form [formGroup] = "productForm">
+   <form [formGroup] = "form">
     <mat-form-field appearance="outline">
         <mat-label> Name</mat-label>
         <input matInput formControlName="name" placeholder="Name">
@@ -23,7 +23,8 @@
 
 <div mat-dialog-action [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Close</button>
-    <button style="margin-left: 8px" (click)="addProduct()" mat-raised-button color="primary">{{actionBtn}}</button>
+    <button *ngIf="!this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="saveAction()" mat-raised-button color="primary">Save</button>
+    <button *ngIf="this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="update()" mat-raised-button color="primary">update</button>
 
 </div>
 

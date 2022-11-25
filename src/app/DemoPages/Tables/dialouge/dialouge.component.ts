@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { FormBaseComponent } from 'src/app/form-base/form-base.component';
+import { DiscountType } from 'src/app/Models/DiscountTypeModel';
 import { GenericServiceService } from 'src/app/Services/generic-service.service';
 
 @Component({
@@ -8,75 +11,153 @@ import { GenericServiceService } from 'src/app/Services/generic-service.service'
   templateUrl: './dialouge.component.html',
   styleUrls: ['./dialouge.component.sass']
 })
-export class DialougeComponent implements OnInit {
-
+export class DialougeComponent    extends FormBaseComponent<DiscountType> implements OnInit {
+  
   freshnessList = ['Brand New', 'Second Hand', 'Refurnished'];
-  productForm!: FormGroup;
+ 
   actionBtn: string = 'Save';
+  
+  page:String
   constructor(
     private formBuilder: FormBuilder,
     private genericService: GenericServiceService,
-    @Inject(MAT_DIALOG_DATA) public editData: any,
-    private dialogref: MatDialogRef<DialougeComponent>
-  ) {}
+    private route:Router,
+    public dialogRef: MatDialogRef<DialougeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+super();
+this.page = data.page;
+this.model = new DiscountType();
+console.log(data);
+
+  }
+
 
   ngOnInit(): void {
-    this.productForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+  
+    this.createForm();
+    // this.productForm = this.formBuilder.group({
+    //   name: ['', Validators.required],
+    //   description: ['', Validators.required],
     
-    });
-    if (this.editData) {
-      this.actionBtn = 'Update';
-      this.productForm.controls['name'].setValue(
-        this.editData.name
-      ),
-        this.productForm.controls['description'].setValue(this.editData.description);
-        // this.productForm.controls['freshness'].setValue(
-        //   this.editData.freshness
-        // ),
-        // this.productForm.controls['price'].setValue(this.editData.price),
-        // this.productForm.controls['comment'].setValue(this.editData.comment),
-        // this.productForm.controls['date'].setValue(this.editData.date);
-    }
+    // });
+    // if (this.editData) {
+    //   this.actionBtn = 'Update';
+    //   this.productForm.controls['name'].setValue(
+    //     this.editData.name
+    //   ),
+    //     this.productForm.controls['description'].setValue(this.editData.description);
+    //     this.productForm.controls['id'].setValue(this.editData.id);
+     
+    //     console.log(this.editData);
+        
+    // }
   }
 
-  addProduct() {
-    if (!this.editData) {
-      if (this.productForm.valid) {
-        this.genericService.createDiscount(this.productForm.value).subscribe({
-          next: (res) => {
-            alert('product added successfully');
-            this.productForm.reset();
-            this.dialogref.close('save');
-          },
-          error: () => {
-            alert('Error while adding the product');
-          },
+
+  createForm() {
+    if (this.data.hasOwnProperty("id")) {
+        this.form = this.formBuilder.group({
+            id: [this.data.id],
+            name: [this.data.name, Validators.required],
+            description: [this.data.description],
         });
-      }
-    }
+    } 
     else {
-      this.updateProduct();
+        this.form = this.formBuilder.group({
+            id: [this.model.id],
+            name: [this.model.name, Validators.required],
+            description: [this.model.description],
+        });
     }
-    // console.log(this.productForm.value);
+}
+
+
+
+ setValues(): void {
+  const data = this.form.getRawValue();
+  if (this.data.hasOwnProperty("id")) {
+      this.data.id = data.id;
+      this.data.name = data.name;
+      this.data.description = data.description;
+  } else {
+      this.model.name = data.name;
+      this.model.description = data.description;
   }
-  updateProduct() {
+  
+}
+
+
+closeDiloag(): void {
+  this.dialogRef.close();
+}
+
+//  saveAction(): void {
+//   this.setValues();
+//   this.genericService.createDiscount(this.model).subscribe((res)=>{
+//     console.log(res);
+    
+    
+//   });
+// }
+
+saveAction() {
+
+    this.setValues();
+        this.genericService.createDiscount(this.model).subscribe((res)=>{
+          this.closeDiloag();
+       
+        })
+      
+
+           
+          
+      
+        
+       
+      
+    
+   
+   
+  }
+  update() {
+    console.log(this.data.id);
+    
+
+    this.setValues();
+        this.genericService.updateDiscount(this.data).subscribe((res)=>{
+          this.closeDiloag();
+       
+        })
+      
+
+           
+          
+      
+        
+       
+      
+    
+   
+   
+  }
+  // updateProduct() {
    
     
-    this.genericService.updateDiscount(this.productForm.value, this.editData.id).subscribe({
-      next: (res) => {
-        alert('Record Updated Successfully');
-        this.productForm.reset();
-        this.dialogref.close('update');
-      },
-      error: () => {
-        console.log("-> "+ this.productForm.value);
-        console.log("-> "+ this.editData.id);
+  //   this.genericService.updateDiscount(this.productForm.value, this.editData.id).subscribe({
+      
+  //     next: (res) => {
+  //       alert('Record Updated Successfully');
+  //       this.productForm.reset();
+  //       this.dialogref.close('update');
+  //     },
+  //     error: () => {
+  //       console.log("-> "+ this.productForm.value);
+  //       console.log("-> "+ this.editData.id);
         
-        alert('Error while updating the record!');
-      },
-    });
-  }
+  //       alert('Error while updating the record!');
+  //     },
+  //   });
+  // }
 
 }

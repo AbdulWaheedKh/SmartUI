@@ -29,7 +29,7 @@ export class RegularComponent implements OnInit {
   icon = 'pe-7s-drawer icon-gradient bg-happy-itmeo';
   discount: DiscountType = new DiscountType();
   discountTypeList: DiscountType[]
-
+  page:String
   constructor(private dialog: MatDialog,private fb: FormBuilder, private genericService: GenericServiceService, private modalService: NgbModal, private router: Router) {
   }
 
@@ -44,15 +44,48 @@ this.getAllProducts();
 
   }
 
-  openDialog() {
+  // openDialog() {
+  //   this.dialog.open(DialougeComponent, {
+  //    width:'30%'
+  //   }).afterClosed().subscribe(val=>{
+  
+  //       this.getAllProducts();
+      
+  //   })
+  // }
+
+
+  openDialog(): void {
     this.dialog.open(DialougeComponent, {
-     width:'30%'
+   
+      data: { 
+       page: this.page,
+       
+   
+        }
+       
     }).afterClosed().subscribe(val=>{
-      if(val === 'save'){
-        this.getAllProducts();
-      }
-    })
+  
+             this.getAllProducts();
+          
+         });
+ 
   }
+
+
+
+  EditopenDialog(action,obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialougeComponent, {
+      data:obj
+    });
+    console.log(obj);
+    
+
+  }
+
+
+  
 
   getAllProducts(){
     this.genericService.get().subscribe({

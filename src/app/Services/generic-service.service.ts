@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { DiscountType } from '../Models/DiscountTypeModel';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,8 +45,13 @@ export class GenericServiceService {
   //   return this.http.put('http://localhost:8080/smartSchool/discountTypesController/', discount);
   // }
 
-  updateDiscount(data:DiscountType , id:number):Observable<any>{
-    return this.http.put<DiscountType>('http://localhost:8080/smartSchool/update/' +id , data)
+  updateDiscount(data:DiscountType):Observable<any>{
+    console.log(data.id);
+    
+    return this.http.put<DiscountType>('http://localhost:8080/smartSchool/discountTypesController/updateDiscountType/' , data)
   }
+
+
+
 
 }

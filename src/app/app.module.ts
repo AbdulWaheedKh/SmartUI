@@ -128,6 +128,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { DialougeComponent } from './DemoPages/Tables/dialouge/dialouge.component';
+// import { FormBaseComponent } from './form-base/form-base.component';
 // import { DialougeComponent } from './Tables/dialouge/dialouge.component';
 
 
@@ -220,6 +221,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DynamicChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
+    // FormBaseComponent,
     // DialougeComponent,
 
     //discount Type
