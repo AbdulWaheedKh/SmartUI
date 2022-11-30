@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DiscountType } from '../Models/DiscountTypeModel';
 import { Observable } from 'rxjs';
+import { AppConstants } from '../Utility/AppConstants';
 
 
 @Injectable({
@@ -10,14 +11,47 @@ import { Observable } from 'rxjs';
 })
 export class GenericServiceService {
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient) {  }
 
+  
+  /*******  CRUD DISCOUNT TYPE *************
+   *******  11-30-2022        **************/
+
+  getAllDiscount() {
+    return this.http.get<DiscountType[]>(AppConstants.GET_DISCOUNT_ALL)
+  }
+  createDiscount(discount: DiscountType):Observable<any>{
+    return this.http.post(AppConstants.CREATE_DISCOUNT, discount);
+  }
+  updateDiscount(data:DiscountType):Observable<any>{
+    return this.http.put<DiscountType>(AppConstants.UPDATE_DISCOUNT_BY_ID , data)
+  }
+  deleteObject(id:number){
+    return this.http.delete<any>(AppConstants.DEL_DISCOUNT_BY_ID + id)
   }
 
-  get() {
-    return this.http.get<DiscountType[]>('http://localhost:8080/smartSchool/institute/32/dicountTypes')
+ /*******  CRUD DISCOUNT TYPE END  **************/
 
+ /*******  CRUD  AY  11-30-2022  **************/
+
+  getAllAY() {
+    return this.http.get<DiscountType[]>(AppConstants.GET_AY_ALL)
   }
+  createAY(discount: DiscountType):Observable<any>{
+    return this.http.post(AppConstants.CREATE_AY, discount);
+  }
+  updateAY(data:DiscountType):Observable<any>{
+    return this.http.put<DiscountType>(AppConstants.UPDATE_AY_BY_ID , data)
+  }
+  deleteAY(id:number){
+    return this.http.delete<any>(AppConstants.DEL_AY_BY_ID + id)
+  }
+
+ 
+ /*******  END  AY **************/
+
+
+
 
   // deleteObject(id: number): Promise<DiscountType> {
   //   return new Promise((resolve, reject) => {
@@ -33,23 +67,6 @@ export class GenericServiceService {
   //   });
   // }
 
-  deleteObject(id:number){
-    return this.http.delete<any>('http://localhost:8080/smartSchool/discountTypesController/' + id)
-  }
-
-  createDiscount(discount: DiscountType):Observable<any>{
-    return this.http.post('http://localhost:8080/smartSchool/discountTypesController/', discount);
-  }
-
-  // updateDiscount(discount: DiscountType):Observable<any>{
-  //   return this.http.put('http://localhost:8080/smartSchool/discountTypesController/', discount);
-  // }
-
-  updateDiscount(data:DiscountType):Observable<any>{
-    console.log(data.id);
-    
-    return this.http.put<DiscountType>('http://localhost:8080/smartSchool/discountTypesController/updateDiscountType/' , data)
-  }
 
 
 

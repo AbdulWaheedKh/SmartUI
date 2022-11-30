@@ -88,7 +88,7 @@ this.getAllProducts();
   
 
   getAllProducts(){
-    this.genericService.get().subscribe({
+    this.genericService.getAllDiscount().subscribe({
       next : (res)=>{
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
