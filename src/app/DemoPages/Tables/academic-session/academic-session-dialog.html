@@ -1,0 +1,52 @@
+<h1 *ngIf="!this.data?.hasOwnProperty('id')" mat-dialog-title>Add Academic Session</h1>
+<h1 *ngIf="this.data?.hasOwnProperty('id')" mat-dialog-title>Update Academic Session</h1>
+<div mat-dialog-content>
+   <form [formGroup] = "form">
+    <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field appearance="outline">
+        <mat-label> Name</mat-label>
+        <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label> Description</mat-label>
+        <input matInput formControlName="description" placeholder="description">
+    </mat-form-field>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field appearance="outline" >
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startDatePicker"  name="startDate" formControlName="startDate"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        <mat-error>Start Date is required!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endDatePicker"   name="endDate"  formControlName="endDate" required>
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-error>End Date is required!</mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+
+
+
+    
+   </form>
+</div>
+
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button *ngIf="!this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="saveAction()" mat-raised-button color="primary">Save</button>
+    <button *ngIf="this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="update()" mat-raised-button color="primary">update</button>
+
+</div>
+

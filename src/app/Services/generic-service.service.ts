@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { DiscountType } from '../Models/DiscountTypeModel';
 import { Observable } from 'rxjs';
 import { AppConstants } from '../Utility/AppConstants';
+import { AcadmicYear } from '../Models/academicYearModel';
 
 
 @Injectable({
@@ -37,8 +38,8 @@ export class GenericServiceService {
   getAllAY() {
     return this.http.get<DiscountType[]>(AppConstants.GET_AY_ALL)
   }
-  createAY(discount: DiscountType):Observable<any>{
-    return this.http.post(AppConstants.CREATE_AY, discount);
+  createAY(academicYear: AcadmicYear):Observable<any>{
+    return this.http.post(AppConstants.CREATE_AY, academicYear);
   }
   updateAY(data:DiscountType):Observable<any>{
     return this.http.put<DiscountType>(AppConstants.UPDATE_AY_BY_ID , data)
