@@ -4,15 +4,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormBaseComponent } from 'src/app/form-base/form-base.component';
 import { AcadmicYear } from 'src/app/Models/academicYearModel';
+import { classCtegory } from 'src/app/Models/classCategoryModel';
 import { DiscountType } from 'src/app/Models/DiscountTypeModel';
 import { GenericServiceService } from 'src/app/Services/generic-service.service';
 
 @Component({
-  selector: 'academic-session-dialog',
-  templateUrl: './academic-session-dialog.html',
+  selector: 'class-category-dialog',
+  templateUrl: './class-category-dialog.html',
 //   styleUrls: ['./dialouge.component.sass']
 })
-export class AcademicSessionDialog    extends FormBaseComponent<AcadmicYear> implements OnInit {
+export class ClassCategoryDialog    extends FormBaseComponent<classCtegory> implements OnInit {
   
 
  
@@ -23,12 +24,12 @@ export class AcademicSessionDialog    extends FormBaseComponent<AcadmicYear> imp
     private formBuilder: FormBuilder,
     private genericService: GenericServiceService,
     private route:Router,
-    public dialogRef: MatDialogRef<AcademicSessionDialog>,
+    public dialogRef: MatDialogRef<ClassCategoryDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 super();
 this.page = data.page;
-this.model = new AcadmicYear();
+this.model = new classCtegory();
 console.log(data);
 
   }
@@ -62,8 +63,7 @@ console.log(data);
             id: [this.data.id],
             name: [this.data.name, Validators.required],
             description: [this.data.description],
-            startDate: [this.data.startDate],
-            endDate: [this.data.endDate],
+       
         });
     } 
     else {
@@ -71,8 +71,7 @@ console.log(data);
             id: [this.model.id],
             name: [this.model.name, Validators.required],
             description: [this.model.description],
-            startDate: [this.model.startDate],
-            endDate: [this.model.endDate],
+         
         });
     }
 }
@@ -85,15 +84,13 @@ console.log(data);
       this.data.id = data.id;
       this.data.name = data.name;
       this.data.description = data.description;
-      this.data.startDate = data.startDate;
-      this.data.endDate = data.endDate;
+     
   } else {
-    this.model.instituteId = 32;
-    this.model.current = 1;
+
+    this.model.instituteId = 1;
       this.model.name = data.name;
       this.model.description = data.description;
-      this.model.startDate = data.startDate;
-      this.model.endDate = data.endDate;
+     
   }
   
 }
@@ -115,7 +112,7 @@ closeDiloag(): void {
 saveAction() {
 
     this.setValues();
-        this.genericService.createAY(this.model).subscribe((res)=>{
+        this.genericService.createClassCategory(this.model).subscribe((res)=>{
           this.closeDiloag();
        
         })
@@ -136,7 +133,7 @@ saveAction() {
     
 
     this.setValues();
-        this.genericService.updateAY(this.data).subscribe((res)=>{
+        this.genericService.updateClassCategory(this.data).subscribe((res)=>{
           this.closeDiloag();
        
         })

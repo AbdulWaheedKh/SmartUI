@@ -1,0 +1,36 @@
+<h1 *ngIf="!this.data?.hasOwnProperty('id')" mat-dialog-title>Add Class Category</h1>
+<h1 *ngIf="this.data?.hasOwnProperty('id')" mat-dialog-title>Update Class Category</h1>
+<div mat-dialog-content>
+   <form [formGroup] = "form">
+    <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field appearance="outline">
+        <mat-label> Name</mat-label>
+        <input matInput formControlName="name" placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label> Description</mat-label>
+        <input matInput formControlName="description" placeholder="description">
+    </mat-form-field>
+    </div>
+
+
+
+
+   
+
+
+
+
+
+    
+   </form>
+</div>
+
+<div mat-dialog-action [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button *ngIf="!this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="saveAction()" mat-raised-button color="primary">Save</button>
+    <button *ngIf="this.data?.hasOwnProperty('id')" style="margin-left: 8px" (click)="update()" mat-raised-button color="primary">update</button>
+
+</div>
+

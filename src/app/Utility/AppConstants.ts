@@ -2,7 +2,7 @@
 //API URL's
 export class AppConstants{
     
-    public static URL_BASE = 'http://localhost:8081/smartSchool/';
+    public static URL_BASE = 'http://localhost:8082/smartSchool/';
 
 /*  CRUD DISCOUNT TYPE  11-30-2022   */
 
@@ -22,5 +22,17 @@ public static DEL_AY_BY_ID = AppConstants.URL_BASE +'academicSessionController/'
 public static UPDATE_AY_BY_ID = AppConstants.URL_BASE +'academicSessionController/';
 
 /*  END AY  */
+
+
+/*  CRUD AY 11-30-2022   */
+
+public static GET_ClassCategory_ALL =   AppConstants.URL_BASE +'institute/32/ClassCategory';
+public static CREATE_ClassCategory =    AppConstants.URL_BASE +'classCategoryController/';
+public static DEL_ClassCategory_BY_ID = AppConstants.URL_BASE +'classCategoryController/';
+public static UPDATE_ClassCategory_BY_ID = AppConstants.URL_BASE +'classCategoryController/';
+
+/*  END Class Category  */
+
+
 
 }

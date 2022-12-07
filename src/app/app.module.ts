@@ -130,6 +130,8 @@ import {MatSortModule} from '@angular/material/sort';
 import { DialougeComponent } from './DemoPages/Tables/dialouge/dialouge.component';
 import { AcademicSessionComponent } from './DemoPages/Tables/academic-session/academic-session.component';
 import { AcademicSessionDialog } from './DemoPages/Tables/academic-session/academic-session-dialog';
+import { ClassCategoryComponent } from './DemoPages/Tables/class-category/class-category.component';
+import { ClassCategoryDialog } from './DemoPages/Tables/class-category/class-category-dialog';
 // import { FormBaseComponent } from './form-base/form-base.component';
 // import { DialougeComponent } from './Tables/dialouge/dialouge.component';
 
@@ -170,6 +172,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AnalyticsComponent,
     DialougeComponent,
     AcademicSessionDialog,
+    ClassCategoryDialog,
     // User Pages
 
     ForgotPasswordBoxedComponent,
@@ -225,6 +228,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BubbleChartComponent,
     ScatterChartComponent,
     AcademicSessionComponent,
+    ClassCategoryComponent,
     // FormBaseComponent,
     // DialougeComponent,
 

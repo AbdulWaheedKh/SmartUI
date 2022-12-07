@@ -5,6 +5,7 @@ import { DiscountType } from '../Models/DiscountTypeModel';
 import { Observable } from 'rxjs';
 import { AppConstants } from '../Utility/AppConstants';
 import { AcadmicYear } from '../Models/academicYearModel';
+import { classCtegory } from '../Models/classCategoryModel';
 
 
 @Injectable({
@@ -36,13 +37,13 @@ export class GenericServiceService {
  /*******  CRUD  AY  11-30-2022  **************/
 
   getAllAY() {
-    return this.http.get<DiscountType[]>(AppConstants.GET_AY_ALL)
+    return this.http.get<AcadmicYear[]>(AppConstants.GET_AY_ALL)
   }
   createAY(academicYear: AcadmicYear):Observable<any>{
     return this.http.post(AppConstants.CREATE_AY, academicYear);
   }
-  updateAY(data:DiscountType):Observable<any>{
-    return this.http.put<DiscountType>(AppConstants.UPDATE_AY_BY_ID , data)
+  updateAY(academicYear:AcadmicYear):Observable<any>{
+    return this.http.put<AcadmicYear>(AppConstants.UPDATE_AY_BY_ID , academicYear)
   }
   deleteAY(id:number){
     return this.http.delete<any>(AppConstants.DEL_AY_BY_ID + id)
@@ -50,6 +51,23 @@ export class GenericServiceService {
 
  
  /*******  END  AY **************/
+
+
+ getAllClassCategory() {
+  return this.http.get<classCtegory[]>(AppConstants.GET_ClassCategory_ALL)
+}
+createClassCategory(classCtegory: classCtegory):Observable<any>{
+  return this.http.post(AppConstants.CREATE_ClassCategory, classCtegory);
+}
+updateClassCategory(classCtegory:classCtegory):Observable<any>{
+  return this.http.put<AcadmicYear>(AppConstants.UPDATE_ClassCategory_BY_ID , classCtegory)
+}
+deleteClassCategory(id:number){
+  return this.http.delete<any>(AppConstants.DEL_ClassCategory_BY_ID + id)
+}
+
+
+/*******  END  AY **************/
 
 
 
