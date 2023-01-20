@@ -132,8 +132,10 @@ import { AcademicSessionComponent } from './DemoPages/Tables/academic-session/ac
 import { AcademicSessionDialog } from './DemoPages/Tables/academic-session/academic-session-dialog';
 import { ClassCategoryComponent } from './DemoPages/Tables/class-category/class-category.component';
 import { ClassCategoryDialog } from './DemoPages/Tables/class-category/class-category-dialog';
+// import { ParentComponent } from './DemoPages/Forms/parent/parent.component';
 // import { FormBaseComponent } from './form-base/form-base.component';
 // import { DialougeComponent } from './Tables/dialouge/dialouge.component';
+import { ParentComponent } from './DemoPages/Tables/parent/parent.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -151,7 +153,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PageTitleComponent,
 
     // HEADER
-
+    ParentComponent,
     HeaderComponent,
     SearchBoxComponent,
     UserBoxComponent,
@@ -229,6 +231,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScatterChartComponent,
     AcademicSessionComponent,
     ClassCategoryComponent,
+
     // FormBaseComponent,
     // DialougeComponent,
 
@@ -243,7 +246,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
-
+ 
     // Angular Bootstrap Components
 
     PerfectScrollbarModule,

@@ -15,12 +15,16 @@ import { AcademicSessionDialog } from './academic-session-dialog';
 
 })
 export class AcademicSessionComponent implements OnInit {
+  public myAngularxQrCode: string = null;
   displayedColumns: string[] = ['name', 'description','startDate' ,'endDate' ,'modifiedDate', 'action' ];
   dataSource!: MatTableDataSource<any>;
   page:String
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private dialog: MatDialog,private fb: FormBuilder, private genericService: GenericServiceService, private modalService: NgbModal, private router: Router) { }
+  constructor(
+    private dialog: MatDialog,private fb: FormBuilder, private genericService: GenericServiceService, private modalService: NgbModal, private router: Router) { 
+      this.myAngularxQrCode = 'ItSoluionStuff.com';
+    }
 
   ngOnInit(): void {
 

@@ -53,6 +53,8 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
 import { AcademicSessionComponent } from './DemoPages/Tables/academic-session/academic-session.component';
 import { ClassCategoryComponent } from './DemoPages/Tables/class-category/class-category.component';
+import { ParentComponent } from './DemoPages/Tables/parent/parent.component';
+
 
 const routes: Routes = [
   {
@@ -88,6 +90,7 @@ const routes: Routes = [
       {path: 'tables/bootstrap', component: TablesMainComponent, data: {extraParameter: 'tablesMenu'}},
       {path: 'tables/academicYear', component: AcademicSessionComponent, data: {extraParameter: 'tablesMenu'}},
       {path: 'tables/classCategory', component: ClassCategoryComponent, data: {extraParameter: 'tablesMenu'}},
+      {path: 'tables/parent', component: ParentComponent, data: {extraParameter: 'tablesMenu'}},
      
       
 
@@ -100,6 +103,7 @@ const routes: Routes = [
 
       {path: 'forms/controls', component: ControlsComponent, data: {extraParameter: 'formElementsMenu'}},
       {path: 'forms/layouts', component: LayoutComponent, data: {extraParameter: 'formElementsMenu'}},
+      // {path: 'forms/parent', component: ParentComponent, data: {extraParameter: 'formElementsMenu'}},
 
       // Charts
 

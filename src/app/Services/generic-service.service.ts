@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AppConstants } from '../Utility/AppConstants';
 import { AcadmicYear } from '../Models/academicYearModel';
 import { classCtegory } from '../Models/classCategoryModel';
+import { Parent } from '../Models/parentModel';
 
 
 @Injectable({
@@ -64,6 +65,11 @@ updateClassCategory(classCtegory:classCtegory):Observable<any>{
 }
 deleteClassCategory(id:number){
   return this.http.delete<any>(AppConstants.DEL_ClassCategory_BY_ID + id)
+}
+
+
+createParent(parent: Parent):Observable<any>{
+  return this.http.post(AppConstants.CREATE_PARENT, parent);
 }
 
 

@@ -31,8 +31,15 @@ public static CREATE_ClassCategory =    AppConstants.URL_BASE +'classCategoryCon
 public static DEL_ClassCategory_BY_ID = AppConstants.URL_BASE +'classCategoryController/';
 public static UPDATE_ClassCategory_BY_ID = AppConstants.URL_BASE +'classCategoryController/';
 
-/*  END Class Category  */
 
+
+public static CREATE_PARENT      =    AppConstants.URL_BASE +'parentController/';
+
+
+
+/*  END Class Category  */
+public static INSTITUTE_ID = 32;
+public static ROLE_ID_PARENT = 33;
 
 
 }
